@@ -1,25 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component  {
+  state = {vrijednost: "" };
+
+promjenaTeksta = event => {
+  console.log("event vrijednost: " + event.target.value);
+  this.setState({vrijednost: event.target.value })
 }
 
+pohranaForme = event => {
+  event.preventDefault();
+  const {vrijednost} = this.state;
+
+  alert("U state je vrijednost: " + vrijednost);
+
+  this.setState({ vrijednost: ""});
+
+};
+  render(){
+    const {vrijednost} = this.state;
+  return (
+    <form onSubmit={this.pohranaForme}>
+      <label>Ime:</label>
+      <input type='text'onChange={this.promjenaTeksta} value={vrijednost}></input>
+      <input type='submit' value="unesi"></input>
+    </form>
+  );
+}
+}
 export default App;
